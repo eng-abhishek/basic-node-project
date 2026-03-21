@@ -1,8 +1,6 @@
 const userModel = require('../models/userModel');
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const blackListModel = require('../models/blacklistModel');
 
 const multer = require('multer');   
