@@ -7,11 +7,13 @@ const authRouter = require('./routes/authRoute');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const cors =require('cors');
 
 dotenv.config();
 
 connectDB();
 
+app.use(cors());
 // for extract raw data from body
 app.use(bodyParser.json());
 

@@ -2,13 +2,11 @@ const userModel = require('../models/userModel');
 
 const userDashboard = async (req,res) => {
 
-  // const users = await userModel.find();
-  // res.json(users);
-
-  res.json({message:'Welcome to user dashboard'});
+  const userInfo = await userModel.findById(req.user.id);
+  res.json({message:'Welcome to user dashboard '+userInfo.username});
 }
 
-const userListing = async (req,res)=>{
+  const userListing = async (req,res)=>{
 
   try{
 
@@ -18,7 +16,6 @@ const userListing = async (req,res)=>{
   }catch(error){
     res.status(500).json({message:error.message});
   }
-
 }
 
 module.exports = {

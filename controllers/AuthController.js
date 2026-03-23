@@ -17,6 +17,8 @@ const register = async (req,res)=>{
 
    const profile_image = req.file ? req.file.buffer.toString('base64') : null;
 
+  // return res.json({message:'Register API',file:profile_image});
+
    const existuser = await userModel.findOne({username});
 
    if(existuser){
@@ -67,7 +69,8 @@ const login = async (req,res) => {
     }
 
     const token = jwt.sign({id:checkemail._id},"secretkey",{expiresIn:'1hr'});
-    res.json({token});
+
+    res.status(200).json({'token':token,'message':'login successfully.'});
 
     }catch(error){
         console.log(error);
@@ -80,7 +83,7 @@ const logout = async (req,res) => {
     try{
 
     const token_raw = req.header('Authorization');
-
+    
     if(!token_raw){
         return res.status(401).json({message:'Unauthorized'});
     }
