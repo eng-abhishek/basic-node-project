@@ -3,7 +3,7 @@ const userModel = require('../models/userModel');
 const userDashboard = async (req,res) => {
 
   const userInfo = await userModel.findById(req.user.id);
-  res.json({message:'Welcome to user dashboard '+userInfo.username});
+  res.status(200).json({userInfo});
 }
 
   const userListing = async (req,res)=>{
