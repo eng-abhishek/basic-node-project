@@ -1,5 +1,9 @@
 const userModel = require('../models/userModel');
 
+const checkValidUser = async(req,res) => {
+   res.status(200).json({user_id:req.user.id});
+}
+
 const userDashboard = async (req,res) => {
 
   const userInfo = await userModel.findById(req.user.id);
@@ -20,5 +24,6 @@ const userDashboard = async (req,res) => {
 
 module.exports = {
     userDashboard,
-    userListing
+    userListing,
+    checkValidUser
 }
