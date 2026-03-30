@@ -11,13 +11,15 @@ const register = async (req,res)=>{
 
 //    return res.json({message:'Register API',file:base64});
 
-   const {username,email,password,dob,address} = req.body;
+   const {username,email,password,dob,address,is_indian_citizon,state,skills,gender,role} = req.body;
+
+    let user_role = role ? (role == "admin" ? "admin" : "user") : "admin";
 
 //    const profile_image = req.file ? req.file.path : null;
 
    const profile_image = req.file ? req.file.buffer.toString('base64') : null;
 
-  // return res.json({message:'Register API',file:profile_image});
+//    return res.json({message:'Register API',file:profile_image});
 
    const existuser = await userModel.findOne({username});
 
@@ -41,7 +43,12 @@ const register = async (req,res)=>{
     password: hashPassword,
     dob,
     address,
-    profileImage: profile_image
+    profileImage: profile_image,
+    is_indian_citizon,
+    state,
+    skills:Array.isArray(skills) ? skills.join(',') : '',
+    gender,
+    role:user_role
    });
    res.json(user);
 
