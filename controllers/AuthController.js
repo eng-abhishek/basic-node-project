@@ -7,13 +7,14 @@ const multer = require('multer');
 
 const register = async (req,res)=>{
 
+
    try{
 
 //    return res.json({message:'Register API',file:base64});
 
    const {username,email,password,dob,address,is_indian_citizon,state,skills,gender,role} = req.body;
 
-    let user_role = role ? (role == "admin" ? "admin" : "user") : "admin";
+    let user_role = role == "admin" ? "admin" : "user";
 
 //    const profile_image = req.file ? req.file.path : null;
 
@@ -75,7 +76,8 @@ const login = async (req,res) => {
     res.status(400).json({message:'Invalid email or password'});
     }
 
-    const token = jwt.sign({id:checkemail._id},"secretkey",{expiresIn:'1hr'});
+    const token = jwt.sign({id:checkemail._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+
 
     res.status(200).json({'token':token,'message':'login successfully.'});
 
@@ -84,6 +86,7 @@ const login = async (req,res) => {
         res.status(500).json({message:error.message});
     }
 }
+
 
 const logout = async (req,res) => {
 

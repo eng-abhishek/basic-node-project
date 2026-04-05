@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoute');
 const authRouter = require('./routes/authRoute');
+const adminAuthRoute = require('./routes/adminAuthRoute');
 
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
@@ -21,6 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api',userRouter,authRouter);
+
+app.use('/api/admin',adminAuthRoute);
 
 app.listen(process.env.PORT,()=>{
   console.log(`port ${process.env.PORT} is active now`);

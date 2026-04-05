@@ -24,7 +24,7 @@ const authentication = async (req,res,next) => {
         }
 
         // Verify JWT token
-        const decode = jwttoken.verify(token,'secretkey');
+        const decode = jwttoken.verify(token, process.env.JWT_SECRET);
         req.user = decode;
         next();
 
