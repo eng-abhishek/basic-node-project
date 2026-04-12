@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel');
 
 const checkValidUser = async(req,res) => {
-   res.status(200).json({user_id:req.user.id});
+   res.status(200).json({user_id:req.user.id,role:req.user.role});
 }
 
 const userDashboard = async (req,res) => {
