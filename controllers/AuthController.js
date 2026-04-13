@@ -51,6 +51,7 @@ const register = async (req,res)=>{
     gender,
     role:user_role
    });
+   
    res.json(user);
 
    }catch(error){
