@@ -17,9 +17,9 @@ if(!isMatch){
     return res.status(400).json({message:'This is not valid admin credentials'});   
 }
 
-const token = jwt.sign({id:adminUser._id}, process.env.admin_JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+const token = jwt.sign({id:adminUser._id, role:adminUser.role}, process.env.admin_JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
 
-res.status(200).json({token, message:'Admin login successful'});
+res.status(200).json({token:token, role:adminUser.role, message:'Admin login successful'});
 
 }
 

@@ -77,10 +77,10 @@ const login = async (req,res) => {
     res.status(400).json({message:'Invalid email or password'});
     }
 
-    const token = jwt.sign({id:checkemail._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+    const token = jwt.sign({id:checkemail._id, role:checkemail.role}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
 
 
-    res.status(200).json({'token':token,'message':'login successfully.'});
+    res.status(200).json({'token':token,'role':checkemail.role, 'message':'login successfully.'});
 
     }catch(error){
         console.log(error);
