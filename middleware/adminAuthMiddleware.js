@@ -19,7 +19,7 @@ const adminAuthMiddleware = async (req,res,next) => {
      return res.status(401).json({message:'Access denied. Token is blacklisted.'});
    }
 
-   const decoded = jwt.verify(token, process.env.admin_JWT_SECRET);
+   const decoded = jwt.verify(token, process.env.JWT_SECRET);
    req.admin = decoded;
    next();
 

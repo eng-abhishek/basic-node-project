@@ -24,7 +24,9 @@ const getUserList = async (req, res) => {
 
     try {
 
+        const adminId = req.admin.id;
         const userList = await userModel.find({ role: 'user' });
+
         res.status(200).json({ users: userList });
 
     } catch (error) {
