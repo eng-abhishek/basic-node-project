@@ -24,10 +24,12 @@ const getUserList = async (req, res) => {
 
     try {
 
+        const [page, limit] = [parseInt(req.query.page), parseInt(req.query.limit)]; // array destructuring to get page and limit from query params
         const adminId = req.admin.id;
-        const userList = await userModel.find({ role: 'user' });
+        const userList = await userModel.find({ role: 'user' }).skip((page-1)*limit).limit(limit);
+        const totalUsers = await userModel.countDocuments({role:'user'});
 
-        res.status(200).json({ users: userList });
+        res.status(200).json({ users: userList, totalUsers: totalUsers, totalPages: Math.ceil(totalUsers / limit)});
 
     } catch (error) {
         res.status(500).json({ message: error.message });
